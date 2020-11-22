@@ -1,0 +1,12 @@
+{
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Dracula",
+    "[terraform]": {
+        "editor.formatOnSave": true
+    },
+    "terraform-ls.rootModules": [
+        "/live/stage/services/pagseguro/payment-status-webhook"
+    ]
+}
