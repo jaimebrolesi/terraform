@@ -27,10 +27,8 @@ provider "aws" {
   region = "sa-east-1"
 }
 
-data "aws_region" "current" {}
-
 locals {
-  env = "stage"
+  env = "homolog"
 }
 
 # ------------------------------------------------------------------------------
@@ -38,12 +36,12 @@ locals {
 # ------------------------------------------------------------------------------
 
 module "payment_status_webhook" {
-  source = "git@github.com:jaimebrolesi/terraform-modules.git//services/pagseguro/payment-status-webhook?ref=v0.0.23"
+  source = "git@github.com:jaimebrolesi/terraform-modules.git//services/pagseguro/payment-status-webhook?ref=v0.0.36"
 
   queue_name              = "${local.env}_pagseguro_payment_status_webhook"
+  queue_body_class        = "br.com.brainweb.pecab2c.order.model.PaymentStatusMessage"
   iam_role_name           = title("${local.env}PagseguroPaymentStatus")
   api_gateway_name        = "${local.env}_pagseguro_webhooks"
   api_gateway_description = "Rest API to use for Pagseguro on Staging environment"
-  aws_region              = data.aws_region.current.name
   environment             = local.env
 }
